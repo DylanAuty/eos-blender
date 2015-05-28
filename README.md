@@ -1,5 +1,5 @@
 # eos-blender
-Part of university group project, scripts relating to Blender animation and F-Curve import
+Part of university group project, scripts relating to Blender animation and F-Curve import for automated animation from data.
 
 ## Overview
 This repository is part of a university group project that aims to send a meteorological balloon into the stratosphere, beam the telemetry data it collects back to Earth, and then display the data in a meaningful way. To this end, we have a website, which you can visit [here](eos.mybluemix.com). It will contain both a live tracker, and an animation that will be rendered using the data after the launch. This repository contains scripts relating to the import of the information into Blender, the 3D modelling program being used to create the animation.
