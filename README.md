@@ -11,6 +11,12 @@ There is a tool that allows for the import of CSV files containing data into Ble
 
 I aim to take our incoming data, which is formatted as a JSON showing a snapshot of the telemetry at a given time, and break it into meaningful CSV files that can be easily imported into Blender. Once the program can reliably generate CSVs for each F-Curve, I will attempt to create a script that will use the [Blender Python API](http://www.blender.org/api/blender_python_api_2_74_5/) to automatically import the results, and generate the output. The ideal finished product would be able to do everything from extracting the raw data from the server, right up to initiating the final render.
 
+## Possible Approaches
+
+The aim is to produce a gradual variation of pose along a curve depending on outside data. producing smooth interpolation between keyframes is difficult to do accurately, and Blender already has this built in. With this in mind, the two approaches I've come across so far are:
+1. Take keyframes for every *pose*, and attempt to produce interpolation within the json\_to\_fcurve.py script. This would inevitably mean that interpolation would be linear for simplicity's sake and to avoid introduction of error. However, it means that less data must be exported from Blender.
+2. Bake the F-Curves in a pre-made sequence cycling through all adjacent poses, and export every keyframe. E.g generate a keyframe for every 0.5 degrees celcius, and choose one for the current temperature. Then export keyframes instead of f-curves and the interpolation between poses will roughly match that of the original animation
+
 ## Files
 ### Input
 CSV Files for each pose in the figure's repertoire (relaxed, comfortable, cold, colder, freezing... dead, etc.)
