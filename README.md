@@ -18,7 +18,19 @@ JSON object pulled from server containing all the launch data in sub-objects.
 
 ### Output
 ####For the pose of the figure:
-72 CSV files with frame number and value columns (one for each bone in the skeleton)
+72 Bones worth of CSV files with frame number and value columns (one for each bone in the skeleton)
+10 F-Curves per bone:
+	- X Location
+	- Y Location
+	- Z Location
+	- W Quaternion Rotation
+	- X Quaternion Rotation
+	- Y Quaternion Rotation
+	- Z Quaternion Rotation
+	- X Scale
+	- Y Scale
+	- Z Scale
+
 ####For the colour of the skin:
 3 CSV files with frame number and colour value for R, G and B channels of diffuse skin colour
 
