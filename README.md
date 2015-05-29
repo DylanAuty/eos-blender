@@ -10,3 +10,15 @@ When animating, you can use an F-Curve to describe the way in which a particular
 There is a tool that allows for the import of CSV files containing data into Blender as an F-Curve, which you can find referenced [here](http://blenderartists.org/forum/showthread.php?209181-A-Script-to-Import-a-CSV-File-and-Create-F-Curves-%28for-Blender-2-5x-or-later%29). However, in a model there may be hundreds of F-Curves to completely describe the scene.
 
 I aim to take our incoming data, which is formatted as a JSON showing a snapshot of the telemetry at a given time, and break it into meaningful CSV files that can be easily imported into Blender. Once the program can reliably generate CSVs for each F-Curve, I will attempt to create a script that will use the [Blender Python API](http://www.blender.org/api/blender_python_api_2_74_5/) to automatically import the results, and generate the output. The ideal finished product would be able to do everything from extracting the raw data from the server, right up to initiating the final render.
+
+## Files
+### Input
+CSV Files for each pose in the figure's repertoire (relaxed, comfortable, cold, colder, freezing... dead, etc.)
+JSON object pulled from server containing all the launch data in sub-objects.
+
+### Output
+####For the pose of the figure:
+72 CSV files with frame number and value columns (one for each bone in the skeleton)
+####For the colour of the skin:
+3 CSV files with frame number and colour value for R, G and B channels of diffuse skin colour
+
