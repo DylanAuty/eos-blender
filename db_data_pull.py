@@ -19,19 +19,19 @@ import requests
 settingsFile = open('./settings.json', 'r+')
 settings = json.loads(settingsFile.read())
 
-API_KEY = settings['settings']['API_KEY']
-PASSWORD = settings['settings']['PASSWORD'] # I.. don't know why these are in caps
+#API_KEY = settings['settings']['API_KEY']
+#PASSWORD = settings['settings']['PASSWORD'] # I.. don't know why these are in caps
 get_url = settings['settings']['GET_URL']
 
 # Authenticate with the Bluemix API
 r = requests.Session()
-r.auth = (API_KEY, PASSWORD)
+#r.auth = (API_KEY, PASSWORD)   # Currently no authentication....
 
 # Construct the payload and attempt the HTTP GET
-payload = {'WHO KNOWS': 'BLAHBLAH'}
+#payload = {'WHO KNOWS': 'BLAHBLAH'}    # No payload at the moment either
 
 try:
-    reply = r.get(get_url, verify=False, params=payload)
+    reply = r.get(get_url, verify=False) #, params=payload)
 
 except requests.exceptions.RequestException as e:
     # Can do stuff with str(e) if I want.. I don't really, though
@@ -50,7 +50,7 @@ except requests.exceptions.RequestException as e:
         print "ERROR: Retry failed"
         
 # Output stage
-output = open("./HRRRM/PLACEHOLDER.json", 'w')
+output = open("./telemetry.json", 'w')
 output.write(str(reply.content))
 output.close()
 
