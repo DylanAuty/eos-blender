@@ -2,6 +2,6 @@
 	{
 		"API_KEY": "PH_API",
 		"PASSWORD": "PH_PW",
-		"GET_URL": "PH_URL"
+		"GET_URL": "balloon.eu-gb.mybluemix.net/getdata"
 	}
 }
