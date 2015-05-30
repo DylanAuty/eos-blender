@@ -6,8 +6,8 @@
 
 import bpy
 
-action = bpy.data.actions['CubeAction']
+action = bpy.data.actions['ColdBake']
 for fc in action.fcurves:
-    if fc.data_path == 'location' and fc.array_index == 0:
-        break
-
+    print(fc.data_path + " channel " + fc.array_index)
+    for keyframe in keyframe_points:
+        print("COORDINATES: " + keyframe.co)
