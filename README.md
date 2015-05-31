@@ -18,6 +18,13 @@ It is also possible to use the Blender API to insert keyframes, rather than enti
 ### Comparing these two approaches, I will be proceeding with approach 2.
 
 ## Files
+### Scripts
+- *db_data_pull.py*: Grabs a gigantic JSON containing telemetry data from the server, puts it in *telemetry.json*
+- *extract_poses.py*: Script to extract the keyframes from the pre-baked F-Curve, and put them in a JSON
+- *json_to_fcurve*: Selects and inserts the appropriate keyframe based on the telemetry data
+- *README.md*: This file...
+- *settings.json*: Contains various settings - GET URL, and if needed then API keys and passwords (though we don't have this at present)
+
 ### Input
 JSON object pulled and formatted from F-Curves of a smooth animation, containing information on every keyframe in the pre-baked animation
 JSON object pulled from server containing all the launch data in sub-objects.
@@ -38,3 +45,6 @@ There are 10 F-Curves per bone:
 => 720 F-Curves, for each of which an appropriate keyframe will be inserted for every frame of incoming data.
 
 The colour of the skin represents another 3 F-Curves, for the red, green and blue channels respectively. These will be treated the same way.
+
+
+
