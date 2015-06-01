@@ -7,19 +7,19 @@
 import bpy
 import json
 
-action = bpy.data.actions['ColdBake']
+action = bpy.data.actions['ColdBake Baked']
+action2 = bpy.data.actions['PythonTest']
 for fc in action.fcurves:
 	print(str(fc.data_path) + " channel " + str(fc.array_index))
 	print("F-CURVE: " + str(fc)) #Does this mean anything?
 	for keyframe in fc.keyframe_points:
-		print("KEYFRAME: " + str(keyframe)) # No idea if this'll do anything worthwhile
+		# print("KEYFRAME: " + str(keyframe)) # No idea if this'll do anything worthwhile
 		# keyframe consists of a control point, left handle and right handle
 		# their coordinates on the F-Curve graph can be accessed using .co, .handle_left, and .handle_right respectively
 		print(str(keyframe.co.x) + ", " + str(keyframe.co.y))
 
 print ("DONE PRINTING...")
 
-action2 = bpy.data.actions['PythonTest']	# Gonna try and insert a keyframe everywhere, value 5, frame 200
 for fc in action2.fcurves:
 	print(str(fc.data_path) + " channel " + str(fc.array_index))
 	# First insert a keyframe for everything at the start...
