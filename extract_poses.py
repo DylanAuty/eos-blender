@@ -26,14 +26,31 @@ for fc in action.fcurves:
 		action2.fcurves[fc_data_path][fc_index].keyframe_points.insert(frame=keyframe.co.x, value=keyframe.co.y)
 		
 """
+"""
+May be able to add a keyframe to an fcurve using this:
+	class bpy.types.ActionFCurves(bpy_struct) is containiner for fcurves (as in action.fcurves)
+	action.fcurves.new(data_path, index, action_group) so can address fcurves using their data path
+"""
+
+
 frameCounter = 0
 
 for fc in action.fcurves:
 	print(str(fc.data_path) + " channel " + str(fc.array_index))
+	frameDict[str(fc.data_path)] = {'data_path' : fc.data_path}
 	for keyframe in fc.keyframe_points:
-		frameDict[keyframe.co.x] = {
-				'frameNo' : keyframe.co.x,
-				'honhonhon' : 'baguette'}
+		frameDict[str(fc.data_path)][keyframe.co.x] = {
+				'frame' : keyframe.co.x,
+				'value' : keyframe.co.y}
 	
 
-print (json.dumps(frameDict, sort_keys=True, indent=4))
+#print (json.dumps(frameDict, indent=4))
+
+# Output stage
+print ("Saving to: " + str(bpy.path.abspath("//eos-blender")))
+
+output = open(bpy.path.abspath("//eos-blender/keyframesRaw.json"), 'w')
+output.write(json.dumps(frameDict, indent=4))
+output.close()
+
+
