@@ -20,5 +20,20 @@ telData = json.loads(telDataFile.read())
 frameNum = len(telData['d'])    # !!!top level entity name uncertain yet!!!
 
 # Aim now is to extract data, convert it into something meaningful and export the appropriate frame of the pre-baked animation...
+# Extraction of keyframes handled by extract_poses.py
 
+# Insertion of keyframes means:
+# 1) Preparing a scene
+# 2) Moving to the relevant frame
+# 3) Selecting the object to be moved
+# 4) Moving it
+# 5) creating the keyframe
+# This translates to:
+# 1) Prepare a scene
+# FOR EACH FRAME OF DATA:
+#   Select appropriate frame of pre-baked animation
+#   move to appropriate frame in scene for frame's timestamp
+#   Insert a keyframe for every F-Curve
+#   FOR EVERY F-CURVE:
+#       Grab each point and move it with bpy.data.actions[ACTION_NAME].fcurves[i].keyframe_points[j].co] = blah
 
