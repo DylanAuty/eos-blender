@@ -9,6 +9,10 @@ import json
 
 action = bpy.data.actions['ColdBake Baked']
 action2 = bpy.data.actions['PythonTest']
+
+frameDict = {}
+
+"""
 for fc in action.fcurves:
 	print(str(fc.data_path) + " channel " + str(fc.array_index))
 	print("F-CURVE: " + str(fc)) #Does this mean anything?
@@ -21,14 +25,15 @@ for fc in action.fcurves:
 		print(str(keyframe.co.x) + ", " + str(keyframe.co.y))
 		action2.fcurves[fc_data_path][fc_index].keyframe_points.insert(frame=keyframe.co.x, value=keyframe.co.y)
 		
+"""
+frameCounter = 0
 
-print ("DONE PRINTING...")
-
-for fc in action2.fcurves:
+for fc in action.fcurves:
 	print(str(fc.data_path) + " channel " + str(fc.array_index))
-	# First insert a keyframe for everything at the start...
-	#fc.keyframe_points.insert(frame=200, value=2)
-	# Now print out all keyframes...
-	#for keyframe in fc.keyframe_points:
-	#	print("KEYFRAME: " + str(keyframe))
-	#	print(str(keyframe.co.x) + ", " + str(keyframe.co.y))
+	for keyframe in fc.keyframe_points:
+		frameDict[keyframe.co.x] = {
+				'frameNo' : keyframe.co.x,
+				'honhonhon' : 'baguette'}
+	
+
+print (json.dumps(frameDict, sort_keys=True, indent=4))
