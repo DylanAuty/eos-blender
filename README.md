@@ -21,16 +21,16 @@ It is also possible to use the Blender API to insert keyframes, rather than enti
 ### Scripts
 - *db_data_pull.py*: Grabs a gigantic JSON containing telemetry data from the server, puts it in *telemetry.json*
 - *extract_poses.py*: Script to extract the keyframes from the pre-baked F-Curve, and put them in a JSON
-- *json_to_fcurve*: Selects and inserts the appropriate keyframe based on the telemetry data
+- *insert_keyframes.py*: Script to insert relevant keyframe into the live action based on data
 - *README.md*: This file...
 - *settings.json*: Contains various settings - GET URL, and if needed then API keys and passwords (though we don't have this at present)
 
 ### Input
-JSON object pulled and formatted from F-Curves of a smooth animation, containing information on every keyframe in the pre-baked animation
-JSON object pulled from server containing all the launch data in sub-objects.
+*keyframesRaw.json*: JSON object pulled and formatted from F-Curves of a smooth animation, containing information on every keyframe in the pre-baked animation
+*telemetry.json*: JSON object pulled from server containing all the launch data in sub-objects.
 
 ### Output
-There are 10 F-Curves per bone:
+There are ~10 F-Curves per bone (depending on rotation type - 3 for Euler, 4 for Quaternion):
 - X Location
 - Y Location
 - Z Location
@@ -42,9 +42,8 @@ There are 10 F-Curves per bone:
 - Y Scale
 - Z Scale
 
-=> 720 F-Curves, for each of which an appropriate keyframe will be inserted for every frame of incoming data.
+=> >700 F-Curves, for each of which an appropriate keyframe will be inserted for every frame of incoming data.
 
-The colour of the skin represents another 3 F-Curves, for the red, green and blue channels respectively. These will be treated the same way.
-
+Toon shading will be used, which demands 2 colours for the skin => 6 curves - Red, Blue and green for each colour. More may be used, but this is a lower priority than producing a functioning product.
 
 
