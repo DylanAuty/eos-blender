@@ -12,39 +12,14 @@ action2 = bpy.data.actions['PythonTest']
 
 frameDict = {}
 
-"""
-for fc in action.fcurves:
-	print(str(fc.data_path) + " channel " + str(fc.array_index))
-	print("F-CURVE: " + str(fc)) #Does this mean anything?
-	fc_index = fc.array_index
-	fc_data_path = fc.data_path
-	for keyframe in fc.keyframe_points:
-		# print("KEYFRAME: " + str(keyframe)) # No idea if this'll do anything worthwhile
-		# keyframe consists of a control point, left handle and right handle
-		# their coordinates on the F-Curve graph can be accessed using .co, .handle_left, and .handle_right respectively
-		print(str(keyframe.co.x) + ", " + str(keyframe.co.y))
-		action2.fcurves[fc_data_path][fc_index].keyframe_points.insert(frame=keyframe.co.x, value=keyframe.co.y)
-		
-"""
-"""
-May be able to add a keyframe to an fcurve using this:
-	class bpy.types.ActionFCurves(bpy_struct) is containiner for fcurves (as in action.fcurves)
-	action.fcurves.new(data_path, index, action_group) so can address fcurves using their data path
-"""
-
-
-frameCounter = 0
-
 for fc in action.fcurves:
 	print(str(fc.data_path) + " channel " + str(fc.array_index))
 	frameDict[str(fc.data_path)] = {'data_path' : fc.data_path}
 	for keyframe in fc.keyframe_points:
 		frameDict[str(fc.data_path)][keyframe.co.x] = {
 				'frame' : keyframe.co.x,
-				'value' : keyframe.co.y}
-	
-
-#print (json.dumps(frameDict, indent=4))
+				'value' : keyframe.co.y
+				}
 
 # Output stage
 print ("Saving to: " + str(bpy.path.abspath("//eos-blender")))
