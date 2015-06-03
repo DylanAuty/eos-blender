@@ -22,31 +22,31 @@ settings = json.loads(settingsFile.read())
 #API_KEY = settings['settings']['API_KEY']
 #PASSWORD = settings['settings']['PASSWORD'] # I.. don't know why these are in caps
 get_url = settings['settings']['GET_URL']
-
+print (str(get_url))
 # Authenticate with the Bluemix API
 r = requests.Session()
 #r.auth = (API_KEY, PASSWORD)   # Currently no authentication....
 
 # Construct the payload and attempt the HTTP GET
-#payload = {'WHO KNOWS': 'BLAHBLAH'}    # No payload at the moment either
-
+payload = {}    # No payload at the moment either
 try:
-    reply = r.get(get_url, verify=False) #, params=payload)
-
+    reply = r.get(get_url, verify=False, params=payload)
 except requests.exceptions.RequestException as e:
     # Can do stuff with str(e) if I want.. I don't really, though
     # temp. soln.: retry 10 times, then exit
     y = 1 
     retrySucceed = False
+    print (str(e))
     for y in range(1, 10):
         try:
-            reply = r.get(get_url, verify=False, params=payload)
+            reply = r.get(get_url, verify=False)
         except requests.exceptions.RequestException as e1:
             pass    # This would be a good place for logging to be done
         else:
             retrySucceed = True
             break   # Retry succeeded
     if not retrySucceed:
+	
         print "ERROR: Retry failed"
         
 # Output stage
