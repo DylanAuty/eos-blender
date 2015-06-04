@@ -1,0 +1,20 @@
+{"d" : {
+	"CallSign" : data[0],
+	"seqNo" : data[1],
+	"timestamp" : data[2],
+	"latitude" : data[3],
+	"longitude" : data[4],
+	"altitude" : data[5],
+	"humidity" : data[6],
+	"x" : data[7],
+	"y" : data[8],
+	"z" : data[9],
+	"light" : data[10],
+	"infrared" : data[11],
+	"pressure" : data[12],
+	"internaltemp" : data[13],
+	"externaltemp" : data[14],
+	"voltage" : data[15]
+	}
+}
+
