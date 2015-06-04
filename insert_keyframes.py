@@ -50,10 +50,9 @@ for i in (0, length):	# Iterate over every telemetry data snapshot
 
 	for fc in action.fcurves:
 		print("Inserting keyframe to: " + str(fc.data_path) + ", ch. " + str(fc.array_index))
-		fc_index = fc.array_index
-		fc_data_path = fc.data_path
-		print("Frame " + str(keyframeData[str(insertFrame)]) + ", " + str(keyframeData[str(insertFrame))
-		action.fcurves.new(data_path=fc.data_path
+		print("Frame " + str(keyframeData[str(insertFrame)]))
+		fc.insert(frame=frameNo, value=keyframeData[str(fc.data_path)][str(insertFrame)]['value'])
+		#action.fcurves.new(data_path=fc.data_path
 		#action2.fcurves[fc_data_path][fc_index].keyframe_points.insert(frame=keyframe.co.x, value=keyframe.co.y)
 	
 
