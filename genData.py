@@ -6,16 +6,18 @@
 import json
 
 sampleNo = 150	# Number of sample frames to generate
+tempDict = []
 dataDict = {}
 currTime = 0	# Simulated time - ms since epoch
 timeStep = 1000 # New frame every second right now
 
-for i in (0, sampleNo):
+for i in range(0, sampleNo):
 	temp = -50 + i
-	dataDict['d'][i] = {
+	currTime += timeStep
+	tempDict.append({
 			'CallSign' : 'IMPIBM',
 			'seqNo' : i,
-			'timestamp' : currTime + timeStep,
+			'timestamp' : str(currTime),
 			'latitude' : 'nope',
 			'longitude' : 'nope',
 			'altitude' : 'yes',
@@ -27,12 +29,13 @@ for i in (0, sampleNo):
 			'infrared' : '1',
 			'pressure' : '1',
 			'internaltemp' : 'blurp',
-			'externaltemp' : temp,
-			'voltage' : '3.3'
-			}
+			'voltage' : '3',
+			'externaltemp' : str(temp)
+			})
 
 # Output stage
 print ("Saving to: ./testData.json")
+dataDict = {'d' : tempDict}
 
 output = open('./testData.json', 'w')
 output.write(json.dumps(dataDict, indent=4))
