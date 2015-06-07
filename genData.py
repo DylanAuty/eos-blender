@@ -32,9 +32,9 @@ for i in (0, sampleNo):
 			}
 
 # Output stage
-print ("Saving to: ./sampleData.json")
+print ("Saving to: ./testData.json")
 
-output = open('./sampleData.json', 'w')
+output = open('./testData.json', 'w')
 output.write(json.dumps(dataDict, indent=4))
 output.close()
 
