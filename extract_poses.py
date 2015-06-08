@@ -11,21 +11,28 @@ action = bpy.data.actions['ColdBake Baked']
 action2 = bpy.data.actions['PythonTest']
 
 frameDict = {}
+tempList = []
 
 for fc in action.fcurves:
-	print(str(fc.data_path) + " channel " + str(fc.array_index))
-	frameDict[str(fc.data_path)] = {'data_path' : fc.data_path}
+	print("Data Path: " + str(fc.data_path) + " array index : " + str(fc.array_index) + " group : " + str(fc.group))
+	frameDict[str(fc.data_path)] = {}
+	
 	for keyframe in fc.keyframe_points:
-		frameDict[str(fc.data_path)][keyframe.co.x] = {
-				'frame' : keyframe.co.x,
-				'value' : keyframe.co.y
-				}
+		tempList.append({str(int(keyframe.co.x)) : {
+			'frame' : int(keyframe.co.x),
+			'value' : keyframe.co.y
+			}
+		}
+		)
+	
+	frameDict[str(fc.data_path)][str(fc.array_index)] = tempList
+	tempList = []
 
 # Output stage
-print ("Saving to: " + str(bpy.path.abspath("//eos-blender")))
+print ("Saving to: " + str(bpy.path.abspath("//eos-blender/keyframesRaw.json")))
 
 output = open(bpy.path.abspath("//eos-blender/keyframesRaw.json"), 'w')
-output.write(json.dumps(frameDict, indent=4))
+output.write(json.dumps(frameDict, indent=4, sort_keys=True))
 output.close()
 
 
