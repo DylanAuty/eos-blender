@@ -26,8 +26,11 @@ In Blender, premade animations can be created called Actions. The Blender API is
 - Switch to the correct frame into which the pose should be inserted
 - Select the armature and switch to pose mode
 - Paste the pose (Copying and pasting poses is handled with a function in the Blender API)
-- (This step may not be necessary) Insert a keyframe for the whole character (entire armature) at that frame
+- Select the skin and set the colours of the control points on the colour ramp (these need to be taken from a file because of the way actions work, they can't be stored as an action and are altered universally
+- (This step may not be necessary) Insert a keyframe for the whole character (entire armature) at that frame (when doing this as a user, keyframes are inserted automatically)
 - Repeat
+
+
 
 ## Approach selection
 Having attempted to make the second approach work, I have found that despite saving all pose data using the *extract_poses.py* script, re-inserting them produced a garbage animation. To check this, I generated test data using *genData.py* which followed the JSON structure that the real data will have. I had it create 150 snapshots of data, varying the external temperature from -50 to 100 degrees C. In light of this failure, I believe the problem is to do with the way Blender handles posing - it is unclear from the documentation whether the values of the keyframes are relative or absolute. It is also unclear what the consequences are of attempting to pose a bone which is part of a rig (e.g. the foot roll rig, or the leg inverse kinematic rig) are, though it is possible that these are some sources of the problems.
