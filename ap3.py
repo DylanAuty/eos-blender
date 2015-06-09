@@ -70,7 +70,8 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	bpy.data.scenes["Scene"].frame_set(int(frameNo))
 	bpy.context.area.type = "VIEW_3D"
 	bpy.ops.pose.paste(flipped=False)	# This should hopefully auto-insert a keyframe...
-	
+
+bpy.context.area.type = originalType
 
 			
 
