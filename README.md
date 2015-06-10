@@ -15,7 +15,7 @@ I aim to take our incoming data, which is formatted as a JSON showing a snapshot
 ### Approach 2 - Selecting and inserting pre-baked keyframes
 It is also possible to use the Blender API to insert keyframes, rather than entire F-Curves. This can be useful, as pre-baking an F-Curve with an animation for a transition between two extremes allows a keyframe to be generated for every step along the scale. The major advantage of this is that no interpolation needs to be done outside of Blender, and the smooth Bezier interpolation done within Blender is preserved. Each keyframe is a point on an F-Curve described by a control point, a left handle and a right handle. These each have coordinates that can be exported - but it may not be necessary to export the control handles if the curves are pre-baked every frame (i.e. no interpolation information is necessary). This approach would select a keyframe according to incoming data, and insert it into the timeline to construct F-Curves.
 
-### Approach 3 - Using the Blender API to simulate a user applying poses to the model
+### Approach 3 - Using the Blender API to simulate user input
 In Blender, premade animations can be created called Actions. The Blender API is built in such a way that every function that the user can perform using the GUI can also be performed using a python script. This approach would be to build a python script that would simulate the following steps, assuming that an action already exists containing the premade hot-to-cold animation:
 - Use telemetry data to work out which frame is required
 - Switch to pre-baked action
