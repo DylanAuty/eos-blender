@@ -75,16 +75,16 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	
 	# Pose is done, so now change colour of the skin and hope it keyframes it...
 	# 2 elements in the colour ramp (for toon shadint) - elem0 first
-	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[0] = (((colourData['colours']['finish']['elem0']['R'] - colourData['colours']['start']['elem0']['R'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem0']['R']
-	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[1] = (((colourData['colours']['finish']['elem0']['G'] - colourData['colours']['start']['elem0']['G'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem0']['G']
-	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[2] = (((colourData['colours']['finish']['elem0']['B'] - colourData['colours']['start']['elem0']['B'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem0']['B']
-	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[3] = (((colourData['colours']['finish']['elem0']['A'] - colourData['colours']['start']['elem0']['A'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem0']['A']
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[0] = (((float(colourData['colours']['finish']['elem0']['R']) - float(colourData['colours']['start']['elem0']['R']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['R'])
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[1] = (((float(colourData['colours']['finish']['elem0']['G']) - float(colourData['colours']['start']['elem0']['G']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['G'])
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[2] = (((float(colourData['colours']['finish']['elem0']['B']) - float(colourData['colours']['start']['elem0']['B']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['B'])
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[3] = (((float(colourData['colours']['finish']['elem0']['A']) - float(colourData['colours']['start']['elem0']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['A'])
 	
 	# Now elem2
-	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[0] = (((colourData['colours']['finish']['elem1']['R'] - colourData['colours']['start']['elem1']['R'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem1']['R']
-	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[1] = (((colourData['colours']['finish']['elem1']['G'] - colourData['colours']['start']['elem1']['G'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem1']['G']
-	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[2] = (((colourData['colours']['finish']['elem1']['B'] - colourData['colours']['start']['elem1']['B'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem1']['B']
-	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[3] = (((colourData['colours']['finish']['elem1']['A'] - colourData['colours']['start']['elem1']['A'])/bakedFrameNo) * insertFrame) + colourData['colours']['start']['elem1']['A']
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[0] = (((float(colourData['colours']['finish']['elem1']['R']) - float(colourData['colours']['start']['elem1']['R']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['R'])
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[1] = (((float(colourData['colours']['finish']['elem1']['G']) - float(colourData['colours']['start']['elem1']['G']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['G'])
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[2] = (((float(colourData['colours']['finish']['elem1']['B']) - float(colourData['colours']['start']['elem1']['B']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['B'])
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[3] = (((float(colourData['colours']['finish']['elem1']['A']) - float(colourData['colours']['start']['elem1']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['A'])
 	
 	
 bpy.context.area.type = originalType
@@ -116,4 +116,5 @@ for i in range(0, length - 1):	# Iterate over every telemetry data snapshot
 
 telemetryFile.close()
 keyframeFile.close()
+colourFile.close()
 
