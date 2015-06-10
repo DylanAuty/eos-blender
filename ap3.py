@@ -79,40 +79,25 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[1] = (((float(colourData['colours']['finish']['elem0']['G']) - float(colourData['colours']['start']['elem0']['G']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['G'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[2] = (((float(colourData['colours']['finish']['elem0']['B']) - float(colourData['colours']['start']['elem0']['B']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['B'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[3] = (((float(colourData['colours']['finish']['elem0']['A']) - float(colourData['colours']['start']['elem0']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['A'])
-	
+
 	# Now elem2
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[0] = (((float(colourData['colours']['finish']['elem1']['R']) - float(colourData['colours']['start']['elem1']['R']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['R'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[1] = (((float(colourData['colours']['finish']['elem1']['G']) - float(colourData['colours']['start']['elem1']['G']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['G'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[2] = (((float(colourData['colours']['finish']['elem1']['B']) - float(colourData['colours']['start']['elem1']['B']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['B'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[3] = (((float(colourData['colours']['finish']['elem1']['A']) - float(colourData['colours']['start']['elem1']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['A'])
 	
+	# KEYFRAME ALL THE THINGS
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=0)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=1)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=2)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=3)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=0)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=1)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=2)
+	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=3)
+
 	
 bpy.context.area.type = originalType
-
-			
-
-
-"""
-for i in range(0, length - 1):	# Iterate over every telemetry data snapshot
-	print(i)
-	currTemp = float(telemetryData['d'][i]['externaltemp'])
-	# On first frame, grab timestamp and save it as the "start"
-	print("Temp : " + str(currTemp))
-	if(i == 0):
-		startTime = float(telemetryData['d'][0]['timestamp'])
-
-	# Select requisite frame from animation and determine where to insert keyframe
-	currTime = float(telemetryData['d'][i]['timestamp'])
-	frameNo = floor((currTime - startTime)/msPerFrame)	# frameNo should hopefully be a float at this point
-	insertFrame = floor((tempUpperBound - currTemp) / degPerFrame) # frame 0 is normal, frame 99 is freezing
-	if (insertFrame > 99.0):
-		insertFrame = 99.0
-	if (insertFrame < 0.0):
-		insertFrame = 0.0
-	
-	bpy.context.screens.spaceDopeSheetEditor
-
-"""
 
 telemetryFile.close()
 keyframeFile.close()
