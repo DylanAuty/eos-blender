@@ -40,19 +40,34 @@ altLowerBound = 0.0
 altUpperBound = 30000.0	# Altitude colour changing tops out at 30km
 altRange = altUpperBound - altLowerBound
 
-originalType = bpy.context.area.type
+originalType = bpy.context.area.type	# To put the display back how it was at the end of the script
 
 skinCol = [[[0 for x in range(4)] for x in range(2)] for x in range(2)]
+bgCol = [[[0 for x in range(3)] for x in range(2)] for x in range(2)]	# Multidimensional lists need instantiation in Python
 
 # Extract colours into arrays now, save doing it later...
+# Start, elem0
 skinCol[0][0][0] = float(colourData['colours']['start']['elem0']['R'])
-skinCol[0][0][1] = float(colourData['colours']['start']['elem0']['R'])	# Indices are, in order: [start/end][element no.][RGBA selection]
-skinCol[0][0][2] = float(colourData['colours']['start']['elem0']['R'])
-skinCol[0][0][3] = float(colourData['colours']['start']['elem0']['R'])
-skinCol[1][0][0] = float(colourData['colours']['start']['elem0']['R'])
-skinCol[1][0][1] = float(colourData['colours']['start']['elem0']['R'])
-skinCol[1][0][2] = float(colourData['colours']['start']['elem0']['R'])
-skinCol[1][0][3] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[0][0][1] = float(colourData['colours']['start']['elem0']['G'])	# Indices are, in order: [start/end][element no.][RGBA selection]
+skinCol[0][0][2] = float(colourData['colours']['start']['elem0']['B'])
+skinCol[0][0][3] = float(colourData['colours']['start']['elem0']['A'])
+# Start, elem1
+skinCol[0][1][0] = float(colourData['colours']['start']['elem1']['R'])
+skinCol[0][1][1] = float(colourData['colours']['start']['elem1']['G'])	
+skinCol[0][1][2] = float(colourData['colours']['start']['elem1']['B'])
+skinCol[0][1][3] = float(colourData['colours']['start']['elem1']['A'])
+# Finish, elem0
+skinCol[1][0][0] = float(colourData['colours']['finish']['elem0']['R'])
+skinCol[1][0][1] = float(colourData['colours']['finish']['elem0']['G'])
+skinCol[1][0][2] = float(colourData['colours']['finish']['elem0']['B'])
+skinCol[1][0][3] = float(colourData['colours']['finish']['elem0']['A'])
+# Finish, elem1
+skinCol[1][1][0] = float(colourData['colours']['finish']['elem1']['R'])
+skinCol[1][1][1] = float(colourData['colours']['finish']['elem1']['G'])
+skinCol[1][1][2] = float(colourData['colours']['finish']['elem1']['B'])
+skinCol[1][1][3] = float(colourData['colours']['finish']['elem1']['A'])
+
+
 
 """
 for i in range(0, length - 1):	# Iterate over snapshots of data
