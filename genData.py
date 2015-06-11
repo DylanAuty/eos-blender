@@ -20,7 +20,7 @@ for i in range(0, sampleNo):
 			'timestamp' : str(currTime),
 			'latitude' : 'nope',
 			'longitude' : 'nope',
-			'altitude' : 'yes',
+			'altitude' : str(i * 200),
 			'humidity' : 'like 3 humidity, maybe 4',
 			'x' : '1',
 			'y' : '2',
