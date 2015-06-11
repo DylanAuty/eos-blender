@@ -124,12 +124,12 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	
 	# Pose is done, so now change colour of the skin and hope it keyframes it...
 	# 2 elements in the colour ramp (for toon shadint) - elem0 first
-"""
+	"""
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[0] = (((float(colourData['colours']['finish']['elem0']['R']) - float(colourData['colours']['start']['elem0']['R']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['R'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[1] = (((float(colourData['colours']['finish']['elem0']['G']) - float(colourData['colours']['start']['elem0']['G']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['G'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[2] = (((float(colourData['colours']['finish']['elem0']['B']) - float(colourData['colours']['start']['elem0']['B']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['B'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[3] = (((float(colourData['colours']['finish']['elem0']['A']) - float(colourData['colours']['start']['elem0']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem0']['A'])
-"""
+	"""
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[0] = (((skinCol[1][0][0] - skinCol[0][0][0])/bakedFrameNo) * insertFrame) + skinCol[0][0][0]
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[1] = (((skinCol[1][0][1] - skinCol[0][0][1])/bakedFrameNo) * insertFrame) + skinCol[0][0][1]
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].color[2] = (((skinCol[1][0][2] - skinCol[0][0][2])/bakedFrameNo) * insertFrame) + skinCol[0][0][2]
@@ -146,7 +146,14 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[3] = (((float(colourData['colours']['finish']['elem1']['A']) - float(colourData['colours']['start']['elem1']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['A'])
 	"""
 	# Also do the background colour - horizon colour and zenith to be set
-	bpy.data.worlds["World"].horizon_color[0] = float
+	# Horizon colour
+	bpy.data.worlds["World"].horizon_color[0] = (((bgCol[1][0][0] - bgCol[0][0][0])/altRange) * float(telemetryData['d'][i]['altitude'])) + bgCol[0][0][0]
+	bpy.data.worlds["World"].horizon_color[1] = (((bgCol[1][0][1] - bgCol[0][0][1])/altRange) * float(telemetryData['d'][i]['altitude'])) + bgCol[0][0][1]
+	bpy.data.worlds["World"].horizon_color[2] = (((bgCol[1][0][2] - bgCol[0][0][2])/altRange) * float(telemetryData['d'][i]['altitude'])) + bgCol[0][0][2]
+	# Zenith colour
+	bpy.data.worlds["World"].zenith_color[0] = (((bgCol[1][1][0] - bgCol[0][1][0])/altRange) * telemetryData['d'][i]['altitude']) + bgCol[0][1][0]
+	bpy.data.worlds["World"].zenith_color[1] = (((bgCol[1][1][1] - bgCol[0][1][1])/altRange) * telemetryData['d'][i]['altitude']) + bgCol[0][1][1]
+	bpy.data.worlds["World"].zenith_color[2] = (((bgCol[1][1][2] - bgCol[0][1][2])/altRange) * telemetryData['d'][i]['altitude']) + bgCol[0][1][2]
 
 	# KEYFRAME ALL THE THINGS
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=0)
@@ -157,7 +164,12 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=1)
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=2)
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].keyframe_insert(data_path="color", frame=frameNo, index=3)
-
+	bpy.data.worlds["World"].keyframe_insert(data_path="horizon_color", frame=frameNo, index=0)
+	bpy.data.worlds["World"].keyframe_insert(data_path="horizon_color", frame=frameNo, index=1)
+	bpy.data.worlds["World"].keyframe_insert(data_path="horizon_color", frame=frameNo, index=2)
+	bpy.data.worlds["World"].keyframe_insert(data_path="zenith_color", frame=frameNo, index=0)
+	bpy.data.worlds["World"].keyframe_insert(data_path="zenith_color", frame=frameNo, index=1)
+	bpy.data.worlds["World"].keyframe_insert(data_path="zenith_color", frame=frameNo, index=2)
 	
 bpy.context.area.type = originalType
 
