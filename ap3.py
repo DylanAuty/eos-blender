@@ -16,7 +16,7 @@ keyframeData = json.loads(keyframeFile.read())
 
 telemetryFile = open(bpy.path.abspath("//eos-blender/testData.json"), 'r')
 telemetryData = json.loads(telemetryFile.read())
-colourFile = open(bpy.path.abspath("//eos-blender/skinColour.json"), 'r')
+colourFile = open(bpy.path.abspath("//eos-blender/colourData.json"), 'r')
 colourData = json.loads(colourFile.read())
 
 length = len(telemetryData['d'])	# Should contain number of frames of data in the telemetry json
@@ -36,8 +36,25 @@ tempUpperBound = 24.0	# Setting "normal" and "cold" points
 tempRange = tempUpperBound - tempLowerBound
 degPerFrame  = tempRange/bakedFrameNo # How many degrees of real temperature correspond to each frame of baked animation
 
+altLowerBound = 0.0
+altUpperBound = 30000.0	# Altitude colour changing tops out at 30km
+altRange = altUpperBound - altLowerBound
+
 originalType = bpy.context.area.type
 
+skinCol = [[[0 for x in range(4)] for x in range(2)] for x in range(2)]
+
+# Extract colours into arrays now, save doing it later...
+skinCol[0][0][0] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[0][0][1] = float(colourData['colours']['start']['elem0']['R'])	# Indices are, in order: [start/end][element no.][RGBA selection]
+skinCol[0][0][2] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[0][0][3] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[1][0][0] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[1][0][1] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[1][0][2] = float(colourData['colours']['start']['elem0']['R'])
+skinCol[1][0][3] = float(colourData['colours']['start']['elem0']['R'])
+
+"""
 for i in range(0, length - 1):	# Iterate over snapshots of data
 	currTemp = float(telemetryData['d'][i]['externaltemp'])
 	# On first frame, grab timestamp and save it as the "start"
@@ -86,6 +103,9 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[2] = (((float(colourData['colours']['finish']['elem1']['B']) - float(colourData['colours']['start']['elem1']['B']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['B'])
 	bpy.data.materials["Skin"].diffuse_ramp.elements[1].color[3] = (((float(colourData['colours']['finish']['elem1']['A']) - float(colourData['colours']['start']['elem1']['A']))/bakedFrameNo) * insertFrame) + float(colourData['colours']['start']['elem1']['A'])
 	
+	# Also do the background colour - horizon colour and zenith to be set
+	bpy.data.worlds["World"].horizon_color[0] = float
+
 	# KEYFRAME ALL THE THINGS
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=0)
 	bpy.data.materials["Skin"].diffuse_ramp.elements[0].keyframe_insert(data_path="color", frame=frameNo, index=1)
@@ -98,7 +118,7 @@ for i in range(0, length - 1):	# Iterate over snapshots of data
 
 	
 bpy.context.area.type = originalType
-
+"""
 telemetryFile.close()
 keyframeFile.close()
 colourFile.close()
